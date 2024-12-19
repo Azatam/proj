@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Finance Tracker{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <ul class="navbar-links left-links">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="/transactions/">Transaction List</a></li> 
+                <li><a href="/transactions/add/">Add Transaction</a></li> 
+            </ul>
+
+            <ul class="navbar-links right-links">
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'register' %}">Register</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <div class="content">
+        {% block content %} {% endblock %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
